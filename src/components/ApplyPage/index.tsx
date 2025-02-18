@@ -14,6 +14,10 @@ const ApplyPage = () => {
 
   return (
     <section className="space-y-5">
+      <div className="py-8 text-center text-3xl font-bold bg-white rounded-2xl">
+        Prography 10기 지원서
+      </div>
+
       <div className="p-4 bg-white rounded-2xl">
         <div className="flex items-center relative">
           <div className="absolute h-1 inset-x-0 bg-gray-200" />
@@ -30,14 +34,14 @@ const ApplyPage = () => {
             {APPLY_STEPS.map((step) => (
               <div
                 key={step.id}
-                className="w-10 h-10 flex items-center justify-center bg-white"
+                className="w-12 h-12 flex items-center justify-center bg-white"
               >
                 <div
                   className={clsx(
-                    "w-8 h-8 rounded-full flex items-center justify-center border-2",
+                    "w-10 h-10 rounded-full flex items-center justify-center",
                     currentStep >= step.id
-                      ? "border-blue-500 text-blue-500"
-                      : "border-gray-200 text-gray-200"
+                      ? "bg-blue-500 text-white"
+                      : "border-2 border-gray-200 text-gray-200"
                   )}
                 >
                   {step.id}
