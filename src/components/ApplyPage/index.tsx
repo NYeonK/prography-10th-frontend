@@ -1,10 +1,10 @@
 import clsx from "clsx";
-import { Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 const APPLY_STEPS = [
-  { id: 1, path: "consent" },
-  { id: 2, path: "info" },
-  { id: 3, path: "job" },
+  { id: 1, path: "/apply/consent" },
+  { id: 2, path: "/apply/info" },
+  { id: 3, path: "/apply/job" },
 ] as const;
 
 const ApplyPage = () => {
@@ -13,8 +13,8 @@ const ApplyPage = () => {
     APPLY_STEPS.find((step) => location.pathname.includes(step.path))?.id ?? 1;
 
   return (
-    <section className="h-full bg-white rounded-2xl">
-      <div className="p-4">
+    <section className="space-y-5">
+      <div className="p-4 bg-white rounded-2xl">
         <div className="flex items-center relative">
           <div className="absolute h-1 inset-x-0 bg-gray-200" />
 
@@ -48,7 +48,32 @@ const ApplyPage = () => {
         </div>
       </div>
 
-      <Outlet />
+      <article className="flex flex-1 p-4 bg-white rounded-2xl">
+        <Outlet />
+      </article>
+
+      <div className="flex justify-between p-4 bg-white rounded-2xl">
+        <Link
+          to={currentStep === 1 ? "/" : APPLY_STEPS[currentStep - 2].path}
+          className={clsx("px-5 py-2 rounded", {
+            "text-gray-500 bg-gray-200 hover:bg-gray-300": currentStep === 1,
+            "text-white bg-blue-500 hover:bg-blue-600": currentStep !== 1,
+          })}
+        >
+          뒤로
+        </Link>
+
+        <Link
+          to={
+            currentStep === APPLY_STEPS.length
+              ? "/complete"
+              : APPLY_STEPS[currentStep].path
+          }
+          className="px-5 py-2 rounded text-white bg-blue-500 hover:bg-blue-600"
+        >
+          {currentStep === APPLY_STEPS.length ? "제출하기" : "다음"}
+        </Link>
+      </div>
     </section>
   );
 };
