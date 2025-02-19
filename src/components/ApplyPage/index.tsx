@@ -2,9 +2,25 @@ import clsx from "clsx";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 const APPLY_STEPS = [
-  { id: 1, path: "/apply/consent" },
-  { id: 2, path: "/apply/info" },
-  { id: 3, path: "/apply/job" },
+  {
+    id: 1,
+    path: "/apply/consent",
+    title: "개인정보 수집 동의",
+    content:
+      "프로그라피 10기 지원을 위한 개인정보 수집에 대한 동의가 필요합니다",
+  },
+  {
+    id: 2,
+    path: "/apply/info",
+    title: "기본 정보",
+    content: "연락 가능한 정보를 입력해주세요",
+  },
+  {
+    id: 3,
+    path: "/apply/job",
+    title: "지원 정보",
+    content: "지원하고자 하는 분야를 선택해주세요",
+  },
 ] as const;
 
 const ApplyPage = () => {
@@ -52,7 +68,17 @@ const ApplyPage = () => {
         </div>
       </div>
 
-      <article className="flex flex-1 p-4 bg-white rounded-2xl">
+      <article className="flex flex-col flex-1 gap-6 p-8 bg-white rounded-2xl">
+        <div className="flex flex-col gap-3">
+          <div className="font-semibold text-2xl">
+            {APPLY_STEPS[currentStep - 1].title}
+          </div>
+          <div className="inset-y-0 h-1 bg-blue-500" />
+          <p className="text-gray-500">
+            {APPLY_STEPS[currentStep - 1].content}
+          </p>
+        </div>
+
         <Outlet />
       </article>
 
