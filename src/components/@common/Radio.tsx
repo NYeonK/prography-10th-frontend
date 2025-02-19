@@ -10,7 +10,13 @@ const Radio = ({ checked, label, onChange }: Props) => {
   return (
     <div
       onClick={onChange}
-      className="flex items-center gap-2 py-5 px-4 border border-gray-200 rounded-lg cursor-pointer"
+      className={clsx(
+        "flex items-center gap-3 py-5 px-4 border rounded-lg cursor-pointer",
+        {
+          "border-blue-500 bg-gray-50": checked,
+          "border-gray-200": !checked,
+        }
+      )}
     >
       <div
         className={clsx(
@@ -20,7 +26,9 @@ const Radio = ({ checked, label, onChange }: Props) => {
       >
         {checked && <div className="w-3 h-3 rounded-full bg-blue-500" />}
       </div>
-      <span>{label}</span>
+      <span className={clsx(checked ? "text-blue-500" : "text-black")}>
+        {label}
+      </span>
     </div>
   );
 };
