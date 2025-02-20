@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Radio from "../@common/Radio";
 
-type JobType = "Fe" | "Be" | "Design" | "Ios" | "Android" | "Po" | null;
+type JobType = "Fe" | "Be" | "Design" | "Ios" | "Android" | "Po";
 
 const JOBS = [
   { value: "Fe", label: "프론트엔드" },
@@ -13,7 +13,7 @@ const JOBS = [
 ] as const;
 
 const ApplyJob = () => {
-  const [job, setJob] = useState<JobType>(null);
+  const [job, setJob] = useState<JobType | null>(null);
 
   const handleJobChange = (selectedJob: JobType) => {
     setJob(job === selectedJob ? null : selectedJob);
