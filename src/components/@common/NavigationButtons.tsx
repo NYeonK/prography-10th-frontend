@@ -18,6 +18,14 @@ const NavigationButtons = ({ currentStep, isValid }: Props) => {
       return;
     }
 
+    const formData = new FormData();
+
+    formData.append("consent", String(consent));
+    formData.append("name", info.name);
+    formData.append("email", info.email);
+    formData.append("phone", info.phone);
+    formData.append("job", job);
+
     // todo :: form data 전송
     console.log(consent, info, job);
 
