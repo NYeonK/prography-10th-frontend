@@ -1,11 +1,11 @@
-import { useState } from "react";
 import Radio from "../@common/Radio";
 import NavigationButtons from "../@common/NavigationButtons";
 import { useOutletContext } from "react-router-dom";
+import { useFormStore } from "../../stores/useFormStore";
 
 const PrivacyConsent = () => {
   const { currentStep } = useOutletContext<{ currentStep: number }>();
-  const [isAgreed, setIsAgreed] = useState<boolean | null>(null);
+  const { consent, setConsent } = useFormStore();
 
   return (
     <>
@@ -23,21 +23,18 @@ const PrivacyConsent = () => {
         </p>
         <div className="flex flex-col gap-4">
           <Radio
-            checked={isAgreed === true}
-            onChange={() => setIsAgreed(isAgreed === true ? null : true)}
+            checked={consent === true}
+            onChange={() => setConsent(consent === true ? null : true)}
             label="개인정보 수집 여부에 동의합니다"
           />
           <Radio
-            checked={isAgreed === false}
-            onChange={() => setIsAgreed(isAgreed === false ? null : false)}
+            checked={consent === false}
+            onChange={() => setConsent(consent === false ? null : false)}
             label="개인정보 수집 여부에 동의하지 않습니다"
           />
         </div>
       </div>
-      <NavigationButtons
-        currentStep={currentStep}
-        isValid={isAgreed !== null}
-      />
+      <NavigationButtons currentStep={currentStep} isValid={consent !== null} />
     </>
   );
 };

@@ -6,7 +6,7 @@ interface FormState {
     name: string;
     email: string;
     phone: string;
-  } | null;
+  };
   job: string | null;
 
   setConsent: (consent: boolean | null) => void;
@@ -16,7 +16,11 @@ interface FormState {
 
 export const useFormStore = create<FormState>((set) => ({
   consent: null,
-  info: null,
+  info: {
+    name: "",
+    email: "",
+    phone: "",
+  },
   job: null,
 
   setConsent: (consent) => set({ consent }),

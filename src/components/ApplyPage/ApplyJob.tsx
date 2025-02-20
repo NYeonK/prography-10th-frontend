@@ -1,7 +1,7 @@
-import { useState } from "react";
 import Radio from "../@common/Radio";
 import NavigationButtons from "../@common/NavigationButtons";
 import { useOutletContext } from "react-router-dom";
+import { useFormStore } from "../../stores/useFormStore";
 
 type JobType = "Fe" | "Be" | "Design" | "Ios" | "Android" | "Po";
 
@@ -16,7 +16,7 @@ const JOBS = [
 
 const ApplyJob = () => {
   const { currentStep } = useOutletContext<{ currentStep: number }>();
-  const [job, setJob] = useState<JobType | null>(null);
+  const { job, setJob } = useFormStore();
 
   const handleJobChange = (selectedJob: JobType) => {
     setJob(job === selectedJob ? null : selectedJob);

@@ -1,27 +1,17 @@
 import { useOutletContext } from "react-router-dom";
 import NavigationButtons from "../@common/NavigationButtons";
-import { useState } from "react";
-
-interface InfoType {
-  name: string;
-  email: string;
-  phone: string;
-}
+import { useFormStore } from "../../stores/useFormStore";
 
 const ApplyInfo = () => {
   const { currentStep } = useOutletContext<{ currentStep: number }>();
-  const [formData, setFormData] = useState<InfoType>({
-    name: "",
-    email: "",
-    phone: "",
-  });
+  const { info, setInfo } = useFormStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
+    setInfo({
+      ...info,
       [name]: value,
-    }));
+    });
   };
 
   return (
@@ -35,7 +25,7 @@ const ApplyInfo = () => {
           <input
             type="text"
             name="name"
-            value={formData.name}
+            value={info.name}
             onChange={handleChange}
             placeholder="예시: 홍길동"
             className="p-3 rounded-md border border-gray-200 bg-gray-50 focus:outline-blue-500"
@@ -52,7 +42,7 @@ const ApplyInfo = () => {
           <input
             type="email"
             name="email"
-            value={formData.email}
+            value={info.email}
             onChange={handleChange}
             placeholder="예시: prography@gmail.com"
             className="p-3 rounded-md border border-gray-200 bg-gray-50 focus:outline-blue-500"
@@ -68,7 +58,7 @@ const ApplyInfo = () => {
           <input
             type="text"
             name="phone"
-            value={formData.phone}
+            value={info.phone}
             onChange={handleChange}
             placeholder="예시: 010-1234-5678"
             className="p-3 rounded-md border border-gray-200 bg-gray-50 focus:outline-blue-500"
@@ -78,9 +68,7 @@ const ApplyInfo = () => {
       </form>
       <NavigationButtons
         currentStep={currentStep}
-        isValid={
-          formData.name !== "" && formData.email !== "" && formData.phone !== ""
-        }
+        isValid={info.name !== "" && info.email !== "" && info.phone !== ""}
       />
     </>
   );
