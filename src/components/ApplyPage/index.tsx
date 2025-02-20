@@ -1,27 +1,6 @@
 import clsx from "clsx";
-import { Link, Outlet, useLocation } from "react-router-dom";
-
-const APPLY_STEPS = [
-  {
-    id: 1,
-    path: "/apply/consent",
-    title: "개인정보 수집 동의",
-    content:
-      "프로그라피 10기 지원을 위한 개인정보 수집에 대한 동의가 필요합니다",
-  },
-  {
-    id: 2,
-    path: "/apply/info",
-    title: "기본 정보",
-    content: "연락 가능한 정보를 입력해주세요",
-  },
-  {
-    id: 3,
-    path: "/apply/job",
-    title: "지원 정보",
-    content: "지원하고자 하는 분야를 선택해주세요",
-  },
-] as const;
+import { Outlet, useLocation } from "react-router-dom";
+import { APPLY_STEPS } from "../../utils/apply-steps";
 
 const ApplyPage = () => {
   const location = useLocation();
@@ -79,31 +58,8 @@ const ApplyPage = () => {
           </p>
         </div>
 
-        <Outlet />
+        <Outlet context={{ currentStep }} />
       </article>
-
-      <div className="flex justify-between p-4 bg-white rounded-2xl">
-        <Link
-          to={currentStep === 1 ? "/" : APPLY_STEPS[currentStep - 2].path}
-          className={clsx("px-5 py-2 rounded", {
-            "text-gray-500 bg-gray-200 hover:bg-gray-300": currentStep === 1,
-            "text-white bg-blue-500 hover:bg-blue-600": currentStep !== 1,
-          })}
-        >
-          뒤로
-        </Link>
-
-        <Link
-          to={
-            currentStep === APPLY_STEPS.length
-              ? "/complete"
-              : APPLY_STEPS[currentStep].path
-          }
-          className="px-5 py-2 rounded text-white bg-blue-500 hover:bg-blue-600"
-        >
-          {currentStep === APPLY_STEPS.length ? "제출하기" : "다음"}
-        </Link>
-      </div>
     </section>
   );
 };

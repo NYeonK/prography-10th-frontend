@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Radio from "../@common/Radio";
+import NavigationButtons from "../@common/NavigationButtons";
+import { useOutletContext } from "react-router-dom";
 
 type JobType = "Fe" | "Be" | "Design" | "Ios" | "Android" | "Po";
 
@@ -13,6 +15,7 @@ const JOBS = [
 ] as const;
 
 const ApplyJob = () => {
+  const { currentStep } = useOutletContext<{ currentStep: number }>();
   const [job, setJob] = useState<JobType | null>(null);
 
   const handleJobChange = (selectedJob: JobType) => {
@@ -20,21 +23,25 @@ const ApplyJob = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 py-5 px-4 border border-gray-200 font-semibold rounded-lg">
-      <p>
-        지원 분야를 선택해주세요
-        <span className="pl-1 text-red-500">*</span>
-      </p>
-      <div className="flex flex-col gap-4">
-        {JOBS.map(({ value, label }) => (
-          <Radio
-            checked={job === value}
-            onChange={() => handleJobChange(value)}
-            label={label}
-          />
-        ))}
+    <>
+      <div className="flex flex-col gap-4 py-5 px-4 border border-gray-200 font-semibold rounded-lg">
+        <p>
+          지원 분야를 선택해주세요
+          <span className="pl-1 text-red-500">*</span>
+        </p>
+        <div className="flex flex-col gap-4">
+          {JOBS.map(({ value, label }) => (
+            <Radio
+              key={value}
+              checked={job === value}
+              onChange={() => handleJobChange(value)}
+              label={label}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+      <NavigationButtons currentStep={currentStep} data={job} />
+    </>
   );
 };
 
