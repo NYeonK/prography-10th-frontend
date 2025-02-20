@@ -12,9 +12,11 @@ interface FormState {
   setConsent: (consent: boolean | null) => void;
   setInfo: (info: FormState["info"]) => void;
   setJob: (job: string | null) => void;
+
+  resetForm: () => void;
 }
 
-export const useFormStore = create<FormState>((set) => ({
+const initialState = {
   consent: null,
   info: {
     name: "",
@@ -22,8 +24,14 @@ export const useFormStore = create<FormState>((set) => ({
     phone: "",
   },
   job: null,
+};
+
+export const useFormStore = create<FormState>((set) => ({
+  ...initialState,
 
   setConsent: (consent) => set({ consent }),
   setInfo: (info) => set({ info }),
   setJob: (job) => set({ job }),
+
+  resetForm: () => set(initialState),
 }));
