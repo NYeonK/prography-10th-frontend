@@ -40,7 +40,7 @@ const ApplyJob = () => {
           ))}
         </div>
       </div>
-      <NavigationButtons currentStep={currentStep} data={job} />
+      <NavigationButtons currentStep={currentStep} isValid={job !== null} />
     </>
   );
 };

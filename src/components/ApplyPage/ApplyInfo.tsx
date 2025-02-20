@@ -76,7 +76,12 @@ const ApplyInfo = () => {
           />
         </div>
       </form>
-      <NavigationButtons currentStep={currentStep} data={null} />
+      <NavigationButtons
+        currentStep={currentStep}
+        isValid={
+          formData.name !== "" && formData.email !== "" && formData.phone !== ""
+        }
+      />
     </>
   );
 };

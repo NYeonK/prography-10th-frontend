@@ -4,10 +4,10 @@ import { APPLY_STEPS } from "../../utils/apply-steps";
 
 interface Props {
   currentStep: number;
-  data: any;
+  isValid: boolean;
 }
 
-const NavigationButtons = ({ currentStep, data }: Props) => {
+const NavigationButtons = ({ currentStep, isValid }: Props) => {
   return (
     <>
       <div className="flex justify-between p-4 bg-white rounded-2xl">
@@ -28,7 +28,7 @@ const NavigationButtons = ({ currentStep, data }: Props) => {
               : APPLY_STEPS[currentStep].path
           }
           onClick={(e) => {
-            if (data === null) {
+            if (!isValid) {
               e.preventDefault();
               alert("필수 항목을 확인해주세요");
             }

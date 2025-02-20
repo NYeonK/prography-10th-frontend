@@ -34,7 +34,10 @@ const PrivacyConsent = () => {
           />
         </div>
       </div>
-      <NavigationButtons currentStep={currentStep} data={isAgreed} />
+      <NavigationButtons
+        currentStep={currentStep}
+        isValid={isAgreed !== null}
+      />
     </>
   );
 };
